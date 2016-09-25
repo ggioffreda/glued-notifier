@@ -1,0 +1,38 @@
+{
+  "name": "glued-notifier",
+  "version": "0.1.4",
+  "description": "GlueJS micro service for sending notification through Firebase Cloud Messaging and Apple Push Notification Service.",
+  "main": "index.js",
+  "dependencies": {
+    "apn": "^2.1.0",
+    "glued-common": "^0.1.3",
+    "node-gcm": "^0.14.4"
+  },
+  "devDependencies": {},
+  "bin": {
+    "glued-notifier-apple": "bin/server-apple.js",
+    "glued-notifier-firebase": "bin/server-firebase.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggioffreda/glued-notifier.git"
+  },
+  "keywords": [
+    "glued",
+    "gluedjs",
+    "glued-js",
+    "notifier",
+    "push notification",
+    "apple",
+    "android",
+    "firebase",
+    "cloud",
+    "messaging"
+  ],
+  "author": "Giovanni Gioffreda <giovanni.gioffreda@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ggioffreda/glued-notifier/issues"
+  },
+  "homepage": "https://github.com/ggioffreda/glued-notifier#readme"
+}
