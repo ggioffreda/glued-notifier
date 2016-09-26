@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const ProcessorManager = require('glued-common').ProcessorManager,
   manager = new ProcessorManager(),
   ApplePushNotifier = require('../src/apple').ApplePushNotifier;
