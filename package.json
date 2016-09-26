@@ -1,6 +1,6 @@
 {
   "name": "glued-notifier",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "GlueJS micro service for sending notification through Firebase Cloud Messaging and Apple Push Notification Service.",
   "main": "index.js",
   "dependencies": {
