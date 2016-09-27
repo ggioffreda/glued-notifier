@@ -1,6 +1,6 @@
 {
   "name": "glued-notifier",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Glue micro service for sending push notifications through FCM and APN",
   "main": "index.js",
   "dependencies": {
