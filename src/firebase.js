@@ -32,7 +32,7 @@ function FirebaseCloudMessagingNotifier(config) {
 
   this.setUp = function (dependencies) {
     const messageBusChannel = dependencies['message-bus'];
-    messageBusChannel.subscribe('*.*._fcm.*.inserted', consumer, 'glued_notifier_firebase');
+    messageBusChannel.subscribe('*.*._notifier_firebase.*.inserted', consumer, 'notifier_firebase');
     this._channel = messageBusChannel;
   }.bind(this);
 

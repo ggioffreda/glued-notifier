@@ -32,7 +32,7 @@ function ApplePushNotifier(config) {
 
   this.setUp = function (dependencies) {
     const messageBusChannel = dependencies['message-bus'];
-    messageBusChannel.subscribe('*.*._apn.*.inserted', consumer, 'glued_notifier_apple');
+    messageBusChannel.subscribe('*.*._notifier_apple.*.inserted', consumer, 'notifier_apple');
     this._channel = messageBusChannel;
   }.bind(this);
 
