@@ -161,7 +161,7 @@ You can install this library using `npm`:
 
     $ npm install --save glued-notifier
 
-To run the server you can install it with the `-g` flag and then run the
+To run the service you can install it with the `-g` flag and then run the
 `glued-notifier-firebase` and `glued-notifier-apple` commands:
 
     $ npm install -g glued-notifier

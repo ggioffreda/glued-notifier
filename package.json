@@ -10,8 +10,8 @@
   },
   "devDependencies": {},
   "bin": {
-    "glued-notifier-apple": "bin/server-apple.js",
-    "glued-notifier-firebase": "bin/server-firebase.js"
+    "glued-notifier-apple": "bin/service-apple.js",
+    "glued-notifier-firebase": "bin/service-firebase.js"
   },
   "repository": {
     "type": "git",
