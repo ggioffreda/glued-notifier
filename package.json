@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "apn": "^2.1.0",
-    "glued-common": "^0.2.0",
+    "glued-common": "^0.2.1",
     "node-gcm": "^0.14.4"
   },
   "devDependencies": {},
