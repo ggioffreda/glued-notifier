@@ -37,6 +37,11 @@ function ApplePushNotifier(config) {
   }.bind(this);
 
   var consumer = function (routingKey, msg, cb) {
+    if (null === routingKey) {
+      // do nothing
+      cb();
+    }
+
     const data = JSON.parse(msg.toString()) || {},
       key = routingKey.split('.').slice(1,4).join('.'),
       payload = data.payload && 'object' === typeof data.payload ? data.payload : {},
