@@ -1,7 +1,13 @@
 function ApplePushNotifier(config) {
   const apn = require('apn'),
     providers = [],
-    util = require('./util');
+    util = require('./util'),
+    state = [],
+    complete = function (channel, key, action) {
+      state[action] = state[action] || 0;
+      state[action]++;
+      util.completed(channel, key, action);
+    };
 
   this._channel = null;
 
@@ -11,6 +17,14 @@ function ApplePushNotifier(config) {
       providers[application] = new apn.Provider(providerConfiguration);
     }
   }
+
+  this.getName = function () {
+    return 'notifier-firebase';
+  };
+
+  this.getState = function () {
+    return { completed: state };
+  };
 
   this.requires = function (dependency) {
     return 'message-bus' === dependency;
@@ -30,7 +44,7 @@ function ApplePushNotifier(config) {
       provider = util.isString(data.application) && providers[application] ? providers[data.application] : null;
 
     if (0 === recipients.length || null === sender) {
-      util.completed(this._channel, key, 'skipped');
+      complete(this._channel, key, 'skipped');
       cb();
     }
 
@@ -40,7 +54,7 @@ function ApplePushNotifier(config) {
     notification.alert = util.isString(data.message) ? data.message : null;
     notification.payload = payload;
     provider.send(notification, recipients).then(function (response) {
-      util.completed(this._channel, key, 'pushed', response);
+      complete(this._channel, key, 'pushed', response);
     }.bind(this));
   }.bind(this);
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const ProcessorManager = require('glued-common').ProcessorManager,
-  manager = new ProcessorManager(),
+const ServiceManager = require('glued-common').ServiceManager,
+  manager = new ServiceManager(),
   FirebaseCloudMessagingNotifier = require('../src/firebase').FirebaseCloudMessagingNotifier;
 
 if (!process.env.GLUED_NOTIFIER_FIREBASE_CONFIG) {

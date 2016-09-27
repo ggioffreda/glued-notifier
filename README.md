@@ -1,11 +1,11 @@
-GluedJS - Notifier
-==================
+Glue - Notifier
+===============
 
-GlueJS micro service for sending notification through Firebase Cloud Messaging
+Glue micro service for sending push notifications through Firebase Cloud Messaging
 and Apple Push Notification Service.
 
-To send a push notification you need to send a message to the store and the 
-processor will automatically detect a new one arrived and will deliver it to the 
+To send a push notification you need to send a message to the store and this 
+service will automatically detect a new one arrived and will deliver it to the 
 recipients. Once delivered, the message in the store will be updated with the
 delivery status and timestamp of when it's been processed.
 

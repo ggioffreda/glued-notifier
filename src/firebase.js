@@ -1,7 +1,13 @@
 function FirebaseCloudMessagingNotifier(config) {
   const fcm = require('node-gcm'),
     senders = [],
-    util = require('./util');
+    util = require('./util'),
+    state = [],
+    complete = function (channel, key, action) {
+      state[action] = state[action] || 0;
+      state[action]++;
+      util.completed(channel, key, action);
+    };
 
   this._channel = null;
 
@@ -11,6 +17,14 @@ function FirebaseCloudMessagingNotifier(config) {
       senders[application] = new fcm.Sender(senderConfiguration.key);
     }
   }
+
+  this.getName = function () {
+    return 'notifier-firebase';
+  };
+
+  this.getState = function () {
+    return { completed: state };
+  };
 
   this.requires = function (dependency) {
     return 'message-bus' === dependency;
@@ -30,7 +44,7 @@ function FirebaseCloudMessagingNotifier(config) {
       sender = util.isString(data.application) && senders[application] ? senders[data.application] : null;
 
     if (0 === recipients.length || null === sender) {
-      util.completed(this._channel, key, 'skipped');
+      complete(this._channel, key, 'skipped');
       cb();
     }
 
@@ -45,10 +59,10 @@ function FirebaseCloudMessagingNotifier(config) {
 
     sender.send(notification, { registrationTokens: recipients }, function (error, response) {
       if (error) {
-        util.completed(this._channel, key, 'errored', { error: error, response: response });
+        complete(this._channel, key, 'errored', { error: error, response: response });
         cb();
       } else {
-        util.completed(this._channel, key, 'pushed', { error: error, response: response });
+        complete(this._channel, key, 'pushed', { error: error, response: response });
         cb();
       }
     }.bind(this));
