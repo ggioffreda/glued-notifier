@@ -20,7 +20,7 @@ function ApplePushNotifier (config) {
   }
 
   this.getName = function () {
-    return 'notifier-firebase'
+    return 'notifier-apple'
   }
 
   this.getState = function () {
