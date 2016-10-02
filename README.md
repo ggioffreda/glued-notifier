@@ -13,6 +13,7 @@ To send your messages to the store you can use the
 [HTTP API](https://github.com/ggioffreda/glued-store#http-api) or the
 [AMQP message bus](https://github.com/ggioffreda/glued-store#amqp-api).
 
+[![Build Status](https://travis-ci.org/ggioffreda/glued-notifier.svg?branch=master)](https://travis-ci.org/ggioffreda/glued-notifier)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 Firebase Cloud Messaging
