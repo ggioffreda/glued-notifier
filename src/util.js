@@ -1,25 +1,25 @@
 var isString = function (value) {
-  return value && Object.prototype.toString.call(value) === '[object String]';
-};
+  return value && Object.prototype.toString.call(value) === '[object String]'
+}
 
 var fetchRecipients = function (data) {
-  var recipients = [];
+  var recipients = []
   if (isString(data.recipient)) {
-    recipients.push(data.recipient);
+    recipients.push(data.recipient)
   }
-  if (data.recipients && Object.prototype.toString.call(value) === '[object Array]') {
+  if (data.recipients && Object.prototype.toString.call(data.recipients) === '[object Array]') {
     for (var recipient in data.recipients) {
       if (isString(recipient)) {
-        recipients.push(recipient);
+        recipients.push(recipient)
       }
     }
   }
-  return recipients;
-};
+  return recipients
+}
 
 var completed = function (channel, notification, action, info) {
-  info = info || {};
-  channel.publish([ 'glued_notifier', notification, action ].join('.'), info);
+  info = info || {}
+  channel.publish([ 'glued_notifier', notification, action ].join('.'), info)
   channel.publish([ 'glued_notifier', notification, 'patch.store' ].join('.'), {
     items: [{
       action: 'update',
@@ -31,9 +31,9 @@ var completed = function (channel, notification, action, info) {
         }
       }
     }]
-  });
-};
+  })
+}
 
-module.exports.isString = isString;
-module.exports.fetchRecipients = fetchRecipients;
-module.exports.completed = completed;
+module.exports.isString = isString
+module.exports.fetchRecipients = fetchRecipients
+module.exports.completed = completed
