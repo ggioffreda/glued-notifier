@@ -37,7 +37,7 @@
     "messaging"
   ],
   "author": "Giovanni Gioffreda <giovanni.gioffreda@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ggioffreda/glued-notifier/issues"
   },
