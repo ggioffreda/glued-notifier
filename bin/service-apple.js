@@ -10,4 +10,4 @@ if (!process.env.GLUED_NOTIFIER_APPLE_CONFIG) {
 
 const config = require(process.env.GLUED_NOTIFIER_APPLE_CONFIG);
 
-manager.load(new ApplePushNotifier(config));
+manager.load(new ApplePushNotifier(config), require('../package.json'));

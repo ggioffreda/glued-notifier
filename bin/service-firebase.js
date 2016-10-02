@@ -10,4 +10,4 @@ if (!process.env.GLUED_NOTIFIER_FIREBASE_CONFIG) {
 
 const config = require(process.env.GLUED_NOTIFIER_FIREBASE_CONFIG);
 
-manager.load(new FirebaseCloudMessagingNotifier(config));
+manager.load(new FirebaseCloudMessagingNotifier(config), require('../package.json'));

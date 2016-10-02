@@ -19,8 +19,8 @@ var fetchRecipients = function (data) {
 
 var completed = function (channel, notification, action, info) {
   info = info || {};
-  channel.publish([ 'glued_notifier', notification, action ].join('.'), new Buffer(JSON.stringify(info)));
-  channel.publish([ 'glued_notifier', notification, 'patch.store' ].join('.'), new Buffer(JSON.stringify({
+  channel.publish([ 'glued_notifier', notification, action ].join('.'), info);
+  channel.publish([ 'glued_notifier', notification, 'patch.store' ].join('.'), {
     items: [{
       action: 'update',
       patch: {
@@ -31,7 +31,7 @@ var completed = function (channel, notification, action, info) {
         }
       }
     }]
-  })));
+  });
 };
 
 module.exports.isString = isString;
