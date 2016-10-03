@@ -12,18 +12,6 @@ function ApplePushNotifier (config) {
 
   this._channel = null
 
-  for (var application in config) {
-    if (config.hasOwnProperty(application)) {
-      const providerConfiguration = JSON.parse(JSON.stringify(config[application]))
-      try {
-        const applicationProvider = new apn.Provider(providerConfiguration)
-        providers[application] = applicationProvider
-      } catch (e) {
-        self._channel.publish(['notifier', 'application', application, 'error'].join('.'), { message: e.message })
-      }
-    }
-  }
-
   this.getName = function () {
     return 'notifier-apple'
   }
@@ -40,6 +28,19 @@ function ApplePushNotifier (config) {
     const messageBusChannel = dependencies['message-bus']
     messageBusChannel.subscribe('*.*._notifier_apple.*.inserted', consumer, 'notifier_apple')
     self._channel = messageBusChannel
+
+    for (var application in config) {
+      if (config.hasOwnProperty(application)) {
+        const providerConfiguration = JSON.parse(JSON.stringify(config[application]))
+        try {
+          const applicationProvider = new apn.Provider(providerConfiguration)
+          providers[application] = applicationProvider
+        } catch (e) {
+          self._channel.publish(['notifier', 'application', application, 'error'].join('.'), { message: e.message })
+        }
+      }
+    }
+
   }
 
   var consumer = function (routingKey, msg, cb) {
