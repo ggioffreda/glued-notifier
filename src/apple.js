@@ -26,7 +26,6 @@ function ApplePushNotifier (config) {
 
   this.setUp = function (dependencies) {
     self._channel = dependencies['message-bus']
-    self._channel.subscribe('*.*._notifier_apple.*.inserted', consumer, 'notifier_apple')
 
     for (var application in config) {
       if (config.hasOwnProperty(application)) {
@@ -38,6 +37,7 @@ function ApplePushNotifier (config) {
         }
       }
     }
+    self._channel.subscribe('*.*._notifier_apple.*.inserted', consumer, 'notifier_apple')
   }
 
   var consumer = function (routingKey, msg, cb) {
