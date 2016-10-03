@@ -15,7 +15,12 @@ function ApplePushNotifier (config) {
   for (var application in config) {
     if (config.hasOwnProperty(application)) {
       const providerConfiguration = JSON.parse(JSON.stringify(config[application]))
-      providers[application] = new apn.Provider(providerConfiguration)
+      try {
+        const applicationProvider = new apn.Provider(providerConfiguration)
+        providers[application] = applicationProvider
+      } catch (e) {
+        self._channel.publish(['notifier', 'application', application, 'error'].join('.'), { message: e.message })
+      }
     }
   }
 
