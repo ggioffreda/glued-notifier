@@ -40,7 +40,6 @@ function ApplePushNotifier (config) {
         }
       }
     }
-
   }
 
   var consumer = function (routingKey, msg, cb) {
@@ -53,7 +52,7 @@ function ApplePushNotifier (config) {
     const key = routingKey.split('.').slice(1, 4).join('.')
     const payload = data.payload && typeof data.payload === 'object' ? data.payload : {}
     const recipients = util.fetchRecipients(data)
-    const provider = util.isString(data.application) && providers[application] ? providers[data.application] : null
+    const provider = util.isString(data.application) && providers[data.application] ? providers[data.application] : null
 
     if (recipients.length === 0 || provider === null) {
       complete(self._channel, key, 'skipped')
