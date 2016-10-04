@@ -36,7 +36,7 @@ function FirebaseCloudMessagingNotifier (config) {
     self._channel.subscribe('*.*._notifier_firebase.*.inserted', consumer, 'notifier_firebase')
   }
 
-  var consumer = function (routingKey, msg, cb) {
+  var consumer = function (routingKey, msg, rawMsg, cb) {
     if (routingKey === null) {
       // do nothing
       cb()

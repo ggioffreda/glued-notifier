@@ -40,7 +40,7 @@ function ApplePushNotifier (config) {
     self._channel.subscribe('*.*._notifier_apple.*.inserted', consumer, 'notifier_apple')
   }
 
-  var consumer = function (routingKey, msg, cb) {
+  var consumer = function (routingKey, msg, rawMsg, cb) {
     const data = msg || {}
     const key = routingKey.split('.').slice(1, 4).join('.')
     const payload = data.payload && typeof data.payload === 'object' ? data.payload : {}
