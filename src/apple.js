@@ -31,7 +31,7 @@ function ApplePushNotifier (config) {
       if (config.hasOwnProperty(application)) {
         const providerConfiguration = JSON.parse(JSON.stringify(config[application]))
         try {
-          providers[application] = new apn.Provider(providerConfiguration)
+          providers[application] = { object: new apn.Provider(providerConfiguration), config: providerConfiguration }
         } catch (e) {
           self._channel.publish(['notifier_apple', 'application', application, 'error'].join('.'), { message: e.message })
         }
@@ -41,11 +41,6 @@ function ApplePushNotifier (config) {
   }
 
   var consumer = function (routingKey, msg, cb) {
-    if (routingKey === null) {
-      // do nothing
-      cb()
-    }
-
     const data = msg || {}
     const key = routingKey.split('.').slice(1, 4).join('.')
     const payload = data.payload && typeof data.payload === 'object' ? data.payload : {}
@@ -62,8 +57,11 @@ function ApplePushNotifier (config) {
     notification.badge = data.badge || null
     notification.alert = util.isString(data.message) ? data.message : null
     notification.payload = payload
-    provider.send(notification, recipients).then(function (response) {
+    notification.topic = provider.config.topic
+    provider.object.send(notification, recipients).then(function (response) {
+      console.log(response.failed)
       complete(self._channel, key, 'pushed', response)
+      cb()
     })
   }
 }
