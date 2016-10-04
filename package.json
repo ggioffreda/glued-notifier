@@ -1,11 +1,11 @@
 {
   "name": "glued-notifier",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Glue micro service for sending push notifications through FCM and APN",
   "main": "index.js",
   "dependencies": {
     "apn": "^2.1.0",
-    "glued-common": "^0.4.0",
+    "glued-common": "^0.4.2",
     "node-gcm": "^0.14.4"
   },
   "devDependencies": {
