@@ -46,7 +46,7 @@ function FirebaseCloudMessagingNotifier (config) {
     const key = routingKey.split('.').slice(1, 4).join('.')
     const payload = data.payload && typeof data.payload === 'object' ? data.payload : {}
     const recipients = util.fetchRecipients(data)
-    const sender = util.isString(data.application) && senders[application] ? senders[data.application] : null
+    const sender = util.isString(data.application) && senders[data.application] ? senders[data.application] : null
 
     if (recipients.length === 0 || sender === null) {
       complete(self._channel, key, 'skipped')
