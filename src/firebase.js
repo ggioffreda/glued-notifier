@@ -12,13 +12,6 @@ function FirebaseCloudMessagingNotifier (config) {
 
   this._channel = null
 
-  for (var application in config) {
-    if (config.hasOwnProperty(application)) {
-      const senderConfiguration = JSON.parse(JSON.stringify(config[application]))
-      senders[application] = new fcm.Sender(senderConfiguration.key)
-    }
-  }
-
   this.getName = function () {
     return 'notifier-firebase'
   }
@@ -32,9 +25,15 @@ function FirebaseCloudMessagingNotifier (config) {
   }
 
   this.setUp = function (dependencies) {
-    const messageBusChannel = dependencies['message-bus']
-    messageBusChannel.subscribe('*.*._notifier_firebase.*.inserted', consumer, 'notifier_firebase')
-    self._channel = messageBusChannel
+    self._channel = dependencies['message-bus']
+
+    for (var application in config) {
+      if (config.hasOwnProperty(application)) {
+        const senderConfiguration = JSON.parse(JSON.stringify(config[application]))
+        senders[application] = new fcm.Sender(senderConfiguration.key)
+      }
+    }
+    self._channel.subscribe('*.*._notifier_firebase.*.inserted', consumer, 'notifier_firebase')
   }
 
   var consumer = function (routingKey, msg, cb) {
